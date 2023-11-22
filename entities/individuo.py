@@ -31,35 +31,34 @@ class Individuo () :
         
         return valor_total, volume_total, valor_total
     def crossover(self, individuo: "Individuo"):
-        index  = random.randint(0, len(self.cromossomo))
+        index = random.randint(0, len(self.cromossomo))
         filho1 = self.cromossomo[:index] + individuo.cromossomo[index:]
-        filho2 =  individuo.cromossomo[:index] + self.cromossomo[index:] 
+        filho2 = individuo.cromossomo[:index] + self.cromossomo[index:]
 
         return (
             Individuo(
                 self.itens,
                 self.limite_de_espacos,
                 self.geracao + 1,
-                self.mutacao(filho1)
-            ), 
+                self.mutacao()  # Remova o argumento aqui
+            ),
             Individuo(
                 self.itens,
                 self.limite_de_espacos,
                 self.geracao + 1,
-                self.mutacao(filho2)
-            ), 
+                self.mutacao() 
+            ),
         )
     
-    def mutacao(self, cromossomos):
-        mutacao_taxa = 5
+    def mutacao(self):
+        mutacao_taxa = 80
         novo_cromossomo = []
-        for i in cromossomos:
+        for i in self.cromossomo:
             x = i
             if mutacao_taxa >= random_0_100(0):
-                x = 1 if x == 0 else 1
+                x = 1 if x == 0 else 0  
 
             novo_cromossomo.append(x)
-
 
         return novo_cromossomo
 

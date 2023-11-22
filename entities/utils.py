@@ -8,3 +8,6 @@ def compare_item(item1: "Individuo", item2: "Individuo") -> int:
         return 0
     
     return 1 if item1.score > item2.score else -1
+
+
+
