@@ -1,5 +1,4 @@
-
-from  entities.individuo import Individuo
+from entities.individuo import Individuo
 from entities.vetorOrdenado import OrderedVector
 from entities.utils import revert_compare, compare_item
 
@@ -7,14 +6,15 @@ class AlgoritmoGenetico:
     @staticmethod
     def executar(itens, limite_espaco, n_populacao, n_geracao):
         populacao = OrderedVector(n_populacao, revert_compare(compare_item))
-        melhores = []
+        melhores_por_geracao = []
+        melhor_global = None
 
         for x in range(n_populacao):
             populacao.insert(Individuo(itens, limite_espaco))
 
-        for i in range(1, n_geracao):
+        for i in range(n_geracao):
             nova_populacao = OrderedVector(n_populacao, revert_compare(compare_item))
-            melhores.append(populacao.get(0))
+            melhores_por_geracao.append(populacao.get(0))
 
             metade = n_populacao // 2
 
@@ -32,5 +32,8 @@ class AlgoritmoGenetico:
 
             populacao = nova_populacao
 
-        melhores.append(populacao.get(0))
-        return melhores
+            melhor_atual = populacao.get(0)
+            if melhor_global is None or melhor_atual.preco_total > melhor_global.preco_total:
+                melhor_global = melhor_atual
+
+        return melhores_por_geracao, melhor_global

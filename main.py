@@ -16,8 +16,8 @@ def remover_item(conjunto_itens, indice_item):
 
 
 def executar_e_analisar(items, limite_espaco, n_populacao, n_geracao):
-    resultados = AlgoritmoGenetico.executar(items, limite_espaco, n_populacao, n_geracao)
-    melhor_resultado = resultados[-1]  
+    melhores_por_geracao, melhor_global = AlgoritmoGenetico.executar(items, limite_espaco, n_populacao, n_geracao)
+    melhor_resultado = melhor_global
 
     print(f"Melhor resultado para {len(items)} itens:")
     print(f"Cromossomo: {melhor_resultado.cromossomo}")
@@ -25,7 +25,8 @@ def executar_e_analisar(items, limite_espaco, n_populacao, n_geracao):
     print(f"Volume total na mochila: {melhor_resultado.volume_total}")
     print("\n")
 
-    plotar_grafico(resultados)
+    plotar_grafico(melhores_por_geracao)
+
 
 
 def criar_itens(conjunto):
