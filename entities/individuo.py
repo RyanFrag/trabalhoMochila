@@ -50,7 +50,7 @@ class Individuo () :
                 ),
             )
     def mutacao(self, cromossomos):
-        mutacao_taxa = 5
+        mutacao_taxa = 10
         novo_cromossomo = []
 
         for i in cromossomos:
